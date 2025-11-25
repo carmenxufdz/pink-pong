@@ -1,0 +1,177 @@
+@font-face {
+    font-family: 'PICO-8';
+    src: url('fonts/pico8.otf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+:root {
+    --bg-color: #E7C0BC;
+    --text-color: #ffffff;
+    --primary-color: #d76a7c;
+    --accent-color: #8b3c46;
+    --button-image: url("images/moon.png");
+    --cross-image: url("images/cross-light.png");
+}
+
+body.dark {
+    --bg-color: #370808;
+    --text-color: #ffffff;
+    --primary-color: #8b3c46;
+    --accent-color: #d76a7c;
+    --button-image: url("images/sun.png");
+    --cross-image: url("images/cross-dark.png");
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    background: var(--bg-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#headerBtn button{
+    width: 40px;
+    height: 40px;
+    border: 4px solid var(--primary-color);
+    border-radius: 0; /* pixel vibe */
+    box-shadow: 
+        4px 4px 0 #5c262e,
+        -4px -4px 0 #b14b58;
+
+    background-color: var(--bg-color);
+    background-size: contain;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    z-index: 11;
+}
+
+#headerBtn button:hover{
+    background-color: var(--primary-color);
+    border: 4px solid var(--primary-color);
+    border-radius: 0; /* pixel vibe */
+    box-shadow: 
+        4px 4px 0 #5c262e,
+        -4px -4px 0 #b14b58;
+}
+
+#themeToggle{
+    position: absolute;
+    top: 2.5%;
+    left: 2%;
+    
+    background-image:var(--button-image); 
+
+}
+
+#crossButton{
+    position: absolute;
+    top: 2.5%;
+    right: 2%;
+
+    background-image:var(--cross-image); 
+}
+
+/* SCORE */
+#score {
+    margin-top: -40px;
+    font-family: 'PICO-8', monospace;;
+    font-size: 40px;
+    color: var(--text-color); 
+    margin-bottom: 20px; 
+
+    white-space: pre; 
+}
+
+/* Centered Canvas */
+
+
+canvas {
+    display: block;
+    background: var(--bg-color);
+    border: none;
+  --fill-color:var(--accent-color)
+}
+
+/* START MENU*/
+#startMenu {
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-family: 'PICO-8', monospace;
+    font-size: 30px;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.35);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+    color: var(--text-color);
+}
+
+#startMenu button {
+    padding: 20px 40px;
+    font-family: 'PICO-8', monospace;
+    font-size: 24px;
+    margin: 10px;
+    border: none;
+    border-radius: 10px;
+    background: var(--primary-color);
+    color: var(--text-color);
+    cursor: pointer;
+}
+
+#startMenu button:hover {
+    background: var(--accent-color);
+}
+
+/* END GAME */
+#overlay{
+    display: none; 
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%; 
+    background: rgba(0,0,0,0.5); 
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center; 
+    z-index: 10;
+}
+
+#winnerMsg{
+    color: var(--text-color); 
+    font-family: 'PICO-8', monospace;;
+    font-size: 48px; 
+    margin-bottom: 20px;
+}
+
+#endButtons{
+    display: flex;
+    flex-direction: row;
+}
+
+#endButtons button {
+    padding: 20px 40px;
+    font-family: 'PICO-8', monospace;
+    font-size: 24px;
+    margin: 10px;
+    border: none;
+    border-radius: 10px;
+    background: var(--primary-color);
+    color: var(--text-color);
+    cursor: pointer;
+}
+#endButtons button:hover {
+    background: var(--accent-color);
+}
