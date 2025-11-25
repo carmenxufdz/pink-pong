@@ -7,6 +7,7 @@ Pink-Pong is my cute take on the classic Pong game, now in shades of pink with r
 - 🎮 **Game Modes:** PVP and PVE
 - 🌗 **Themes:** Light and Dark mode
 - 🚀 **Dynamic Ball:** Ball speeds up over time if no one scores
+- ⚡ **Smart Ball Physics:** The ball bounces at different angles depending on where it hits the paddle, making gameplay more dynamic and challenging.
 - 🔊 **Retro Sounds:** Bounces, scores, and win effects made with Chiptone by SFBGames
 - 🎨 **Pixel Art:** All graphics created by me
 - 🛠 **Clean Code Structure:** HTML, CSS, and JS are separated
