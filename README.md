@@ -26,4 +26,4 @@ Pink-Pong is my cute take on the classic Pong game, now in shades of pink with r
 
 ---
 
-<h3 style="align-items: center">**Have fun playing Pink Pong!** 🩷</h3> 
+<h3 style="align-items: center">Have fun playing Pink Pong! 🩷</h3> 
