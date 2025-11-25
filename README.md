@@ -1,4 +1,4 @@
-[[](https://github.com/carmenxufdz/pink-pong/blob/main/images/banner.png)]
+![](https://github.com/carmenxufdz/pink-pong/blob/main/images/banner.png)
 # Pink Pong 🩷
 ### *A Pong for the girlies!*
 
