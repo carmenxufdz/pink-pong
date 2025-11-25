@@ -26,4 +26,13 @@ Pink-Pong is my cute take on the classic Pong game, now in shades of pink with r
 
 ---
 
+## Play Online
+Click the image or link below to play Pink Pong on Itch.io:  
+
+[![Play Pink Pong](https://img.itch.zone/aW1hZ2UvNDA2ODQyNC82NDAwNjQ4LnBuZw==/original/b9DgxC.png)](https://alissea.itch.io/pink-pong)  
+
+<iframe frameborder="0" src="https://itch.io/embed/4068424" width="552" height="167">
+<a href="https://alissea.itch.io/pink-pong">Pink Pong 🩷 – a Pong for the girlies! by Alissea</a>
+</iframe>
+
 ### Have fun playing Pink Pong!🩷
