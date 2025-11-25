@@ -17,7 +17,8 @@ Pink Pong is my cute take on the classic Pong game, now in shades of pink with r
 
 ## Technologies
 - HTML / CSS / JavaScript
-- [Optional: add if you used any library or framework]
+- [Chiptone by SFBGames](https://sfbgames.itch.io/chiptone)
+- Aseprite
 
 ## Screenshots
 ![Gif or image of the game]
