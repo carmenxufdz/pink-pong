@@ -203,18 +203,6 @@ function loop()
     ball.x += ball.dx;
     ball.y += ball.dy;
 
-    // prevent ball from going through walls by changing its velocity
-    if (ball.y < grid) {
-        ball.y = grid;
-        ball.dy *= -1;
-        bounceSound.play();
-    }
-    else if (ball.y + grid > canvas.height - grid) {
-        ball.y = canvas.height - grid * 2;
-        ball.dy *= -1;
-        bounceSound.play();
-    }
-
     // incrementar la velocidad gradualmente
     if (!ball.resetting) {  // solo mientras no se esté reiniciando
         ball.speedMultiplier += ballSpeedIncrement;
@@ -225,7 +213,6 @@ function loop()
         ball.dx = Math.sign(ball.dx) * currentSpeed;
         ball.dy = Math.sign(ball.dy) * currentSpeed;
     }
-
 
     // reset ball if it goes past paddle (but only if we haven't already done so)
     if ( ball.x < 0  && !ball.resetting) {
@@ -258,8 +245,20 @@ function loop()
         }, 1000);
     }
 
+        // prevent ball from going through walls by changing its velocity
+    else if (ball.y < grid) {
+        ball.y = grid;
+        ball.dy *= -1;
+        bounceSound.play();
+    }
+    else if (ball.y + grid > canvas.height - grid) {
+        ball.y = canvas.height - grid * 2;
+        ball.dy *= -1;
+        bounceSound.play();
+    }
+
     // check to see if ball collides with paddle. if they do change x velocity
-    if (collides(ball, leftPaddle)) {
+    else if (collides(ball, leftPaddle)) {
         paddleBounce(ball, leftPaddle);
         bounceSound.play();
 
