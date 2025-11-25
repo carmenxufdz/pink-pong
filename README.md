@@ -22,7 +22,7 @@ Pink-Pong is my cute take on the classic Pong game, now in shades of pink with r
 - Aseprite
 
 ## Screenshots
-![Gif or image of the game]
+![Gif of the game](https://github.com/carmenxufdz/pink-pong/blob/main/media/video.gif)
 
 ---
 
