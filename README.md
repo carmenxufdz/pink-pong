@@ -1,4 +1,4 @@
-# Pink Pong 💖
+# Pink Pong 🩷
 ### *A Pong for the girlies!*
 
 Pink-Pong is my cute take on the classic Pong game, now in shades of pink with retro pixel art and fun sounds! Unlike many small web games, the project keeps **HTML, CSS, and JavaScript completely separated** for better structure and readability.  
@@ -26,4 +26,4 @@ Pink-Pong is my cute take on the classic Pong game, now in shades of pink with r
 
 ---
 
-**Have fun playing Pink Pong!** 💖
+**Have fun playing Pink Pong!** 🩷
