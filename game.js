@@ -126,6 +126,11 @@ function draw() {
 
     context.fillRect(0, 0, canvas.width, grid);
     context.fillRect(0, canvas.height- grid, canvas.width, canvas.height);
+
+    // draw dotted line down the middle
+    for (let i = 0; i < canvas.height; i += grid * 2) {
+        context.fillRect(canvas.width / 2 - grid / 2, i, grid, grid);
+    }
 }
 
 function paddleBounce(ball, paddle) {
@@ -224,7 +229,7 @@ function loop()
             ball.resetting = false;
             ball.x = canvas.width / 2;
             ball.y = canvas.height / 2;
-            ball.speedMultiplier = 1;       // restart spped
+            ball.speedMultiplier = 1;       // restart speed
             ball.dx = ballSpeed;             // base speed
             ball.dy = Math.sign(ball.dy) * ballSpeed;
         }, 1000);
@@ -239,13 +244,13 @@ function loop()
             ball.resetting = false;
             ball.x = canvas.width / 2;
             ball.y = canvas.height / 2;
-            ball.speedMultiplier = 1;       // restart spped
+            ball.speedMultiplier = 1;       // restart speed
             ball.dx = -ballSpeed;            // base speed
             ball.dy = Math.sign(ball.dy) * ballSpeed;
         }, 1000);
     }
 
-        // prevent ball from going through walls by changing its velocity
+    // prevent ball from going through walls by changing its velocity
     else if (ball.y < grid) {
         ball.y = grid;
         ball.dy *= -1;
@@ -256,7 +261,6 @@ function loop()
         ball.dy *= -1;
         bounceSound.play();
     }
-
     // check to see if ball collides with paddle. if they do change x velocity
     else if (collides(ball, leftPaddle)) {
         paddleBounce(ball, leftPaddle);
@@ -277,10 +281,6 @@ function loop()
 
 
 
-    // draw dotted line down the middle
-    for (let i = 0; i < canvas.height; i += grid * 2) {
-        context.fillRect(canvas.width / 2 - grid / 2, i, grid, grid);
-    }
 
 
     updateScore();
@@ -334,6 +334,8 @@ document.addEventListener('keyup', function(e)
         }
     }
 });
+
+// Restart and Back buttons
 
 document.getElementById('restartButton').addEventListener('click', () => {
     document.getElementById('overlay').style.display = 'none';
