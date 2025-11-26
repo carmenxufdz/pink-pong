@@ -289,6 +289,9 @@ function loop()
 // listen to keyboard events to move the paddles
 document.addEventListener('keydown', function(e) 
 {
+    if(e.keyCode==38||e.keyCode==40)
+        e.preventDefault()
+
     if (gameMode === 'PVE') {
         if (e.which === 87 || e.which === 38) leftPaddle.dy = -paddleSpeed; // W up arrow key
         else if (e.which === 83 || e.which === 40) leftPaddle.dy = paddleSpeed; // S down arrow key
