@@ -14,9 +14,9 @@ const maxScore = 5; // first to get 5 points win
 
 let gameRunning = false;
 
-var paddleSpeed = 6;
-var ballSpeed = 4;      // base speed
-var ballSpeedMax = 10;  // max speed
+var paddleSpeed = 4;
+var ballSpeed = 1;      // base speed
+var ballSpeedMax = 5;  // max speed
 var ballSpeedIncrement = 0.002; // speed increment per frame
 
 let gameMode = null; // "PVP" or "PVE"
@@ -26,6 +26,7 @@ let scoreRight = 0;
 
 var playerOne = 'player one';
 var playerTwo = 'player two';
+
 
 document.getElementById('pvpBtn').addEventListener('click', () => startGame('PVP'));
 document.getElementById('pveBtn').addEventListener('click', () => startGame('PVE'));
@@ -125,7 +126,7 @@ function draw() {
     context.fillRect(ball.x, ball.y, ball.width, ball.height);
 
     context.fillRect(0, 0, canvas.width, grid);
-    context.fillRect(0, canvas.height- grid, canvas.width, canvas.height);
+    context.fillRect(0, canvas.height - grid, canvas.width, canvas.height);
 
     // draw dotted line down the middle
     for (let i = 0; i < canvas.height; i += grid * 2) {
@@ -173,12 +174,11 @@ function loop()
     // The paddle "follows" the ball
     if (gameMode === 'PVE') {
         const paddleCenter = rightPaddle.y + rightPaddle.height / 2;
-        const speed = 4; 
 
         if (ball.y < paddleCenter) {
-            rightPaddle.dy = -speed;
+            rightPaddle.dy = -paddleSpeed;
         } else if (ball.y > paddleCenter) {
-            rightPaddle.dy = speed;
+            rightPaddle.dy = paddleSpeed;
         } else {
             rightPaddle.dy = 0;
         }
@@ -261,8 +261,51 @@ function loop()
         ball.dy *= -1;
         bounceSound.play();
     }
+    
+    // reset ball if it goes past paddle (but only if we haven't already done so)
+    if ( ball.x < 0  && !ball.resetting) {
+        ball.resetting = true;
+        scoreRight++;
+        scoreSound.play();
+
+        setTimeout(() => {
+            ball.resetting = false;
+            ball.x = canvas.width / 2;
+            ball.y = canvas.height / 2;
+            ball.speedMultiplier = 1;       // restart speed
+            ball.dx = ballSpeed;             // base speed
+            ball.dy = Math.sign(ball.dy) * ballSpeed;
+        }, 1000);
+
+    }
+    else if ( ball.x > canvas.width && !ball.resetting) {
+        ball.resetting = true;
+        scoreLeft++;
+        scoreSound.play();
+
+        setTimeout(() => {
+            ball.resetting = false;
+            ball.x = canvas.width / 2;
+            ball.y = canvas.height / 2;
+            ball.speedMultiplier = 1;       // restart speed
+            ball.dx = -ballSpeed;            // base speed
+            ball.dy = Math.sign(ball.dy) * ballSpeed;
+        }, 1000);
+    }
+
+    // prevent ball from going through walls by changing its velocity
+    else if (ball.y < grid) {
+        ball.y = grid;
+        ball.dy *= -1;
+        bounceSound.play();
+    }
+    else if (ball.y + grid > canvas.height - grid) {
+        ball.y = canvas.height - grid * 2;
+        ball.dy *= -1;
+        bounceSound.play();
+    }
     // check to see if ball collides with paddle. if they do change x velocity
-    else if (collides(ball, leftPaddle)) {
+    else if (collides(ball, leftPaddle) && ball.dx < 0) {
         paddleBounce(ball, leftPaddle);
         bounceSound.play();
 
@@ -270,7 +313,7 @@ function loop()
         // in the next frame
         ball.x = leftPaddle.x + leftPaddle.width;
     }
-    else if (collides(ball, rightPaddle)) {
+    else if (collides(ball, rightPaddle) && ball.dx > 0) {
         paddleBounce(ball, rightPaddle);
         bounceSound.play();
 
@@ -279,17 +322,13 @@ function loop()
         ball.x = rightPaddle.x - ball.width;
     }
 
-
-
-
-
     updateScore();
 }
 
 // listen to keyboard events to move the paddles
 document.addEventListener('keydown', function(e) 
 {
-    if(e.keyCode==38||e.keyCode==40)
+    if(e.keyCode==32||e.keyCode==38||e.keyCode==40)
         e.preventDefault()
 
     if (gameMode === 'PVE') {
@@ -384,3 +423,22 @@ crossButton.addEventListener("click", () => {
 });
 
 
+canvas.addEventListener("touchstart", handleTouch);
+canvas.addEventListener("touchmove", handleTouch);
+
+function handleTouch(e) {
+    e.preventDefault();
+
+    for (let t of e.touches) {
+        const pos = getTouchPos(t);
+
+        // Mitad izquierda → mueve pala izquierda
+        if (pos.x < canvas.width / 2) {
+            leftPaddle.y = pos.y - leftPaddle.height / 2;
+        }
+        // Mitad derecha → mueve pala derecha
+        else {
+            rightPaddle.y = pos.y - rightPaddle.height / 2;
+        }
+    }
+}
