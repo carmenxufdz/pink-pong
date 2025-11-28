@@ -28,6 +28,7 @@ var playerOne = 'player one';
 var playerTwo = 'player two';
 
 
+
 document.getElementById('pvpBtn').addEventListener('click', () => startGame('PVP'));
 document.getElementById('pveBtn').addEventListener('click', () => startGame('PVE'));
 
@@ -421,24 +422,3 @@ crossButton.addEventListener("click", () => {
     document.getElementById('overlay').style.display = 'none';
     document.getElementById('startMenu').style.display = 'flex';
 });
-
-
-canvas.addEventListener("touchstart", handleTouch);
-canvas.addEventListener("touchmove", handleTouch);
-
-function handleTouch(e) {
-    e.preventDefault();
-
-    for (let t of e.touches) {
-        const pos = getTouchPos(t);
-
-        // Mitad izquierda → mueve pala izquierda
-        if (pos.x < canvas.width / 2) {
-            leftPaddle.y = pos.y - leftPaddle.height / 2;
-        }
-        // Mitad derecha → mueve pala derecha
-        else {
-            rightPaddle.y = pos.y - rightPaddle.height / 2;
-        }
-    }
-}
