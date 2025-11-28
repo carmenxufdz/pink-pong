@@ -6,7 +6,7 @@ const bounceSound = new Audio('sounds/bounce.wav');
 const scoreSound = new Audio('sounds/score.wav');
 const winSound = new Audio('sounds/win.wav');
 
-const grid = 15;
+const grid = 10;
 const paddleHeight = grid * 5; // 80
 const maxPaddleY = canvas.height - grid - paddleHeight;
 
@@ -379,6 +379,7 @@ crossButton.addEventListener("click", () => {
 
     document.getElementById('game').style.display = 'none';
     document.getElementById('score').style.display = 'none';
+    document.getElementById('overlay').style.display = 'none';
     document.getElementById('startMenu').style.display = 'flex';
 });
 
