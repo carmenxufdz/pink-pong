@@ -14,10 +14,10 @@ const maxScore = 5; // first to get 5 points win
 
 let gameRunning = false;
 
-var paddleSpeed = 4;
+var paddleSpeed = 3;
 var ballSpeed = 1;      // base speed
-var ballSpeedMax = 5;  // max speed
-var ballSpeedIncrement = 0.002; // speed increment per frame
+var ballSpeedMax = 3;  // max speed
+var ballSpeedIncrement = 0.001; // speed increment per frame
 
 let gameMode = null; // "PVP" or "PVE"
 
@@ -27,7 +27,7 @@ let scoreRight = 0;
 var playerOne = 'player one';
 var playerTwo = 'player two';
 
-
+var currentSpeed = ballSpeed;
 
 document.getElementById('pvpBtn').addEventListener('click', () => startGame('PVP'));
 document.getElementById('pveBtn').addEventListener('click', () => startGame('PVE'));
@@ -143,13 +143,10 @@ function paddleBounce(ball, paddle) {
     let maxAngle = Math.PI / 4; // 45°
     let angle = (relativeY - 0.5) * 2 * maxAngle;
 
-    // starting speed
-    let speed = Math.sqrt(ball.dx * ball.dx + ball.dy * ball.dy);
-
     let direction = ball.x < canvas.width / 2 ? 1 : -1;
 
-    ball.dx = speed * Math.cos(angle) * direction;
-    ball.dy = speed * Math.sin(angle);
+    ball.dx = currentSpeed * Math.cos(angle) * direction;
+    ball.dy = currentSpeed * Math.sin(angle);
 }
 
 
@@ -177,9 +174,9 @@ function loop()
         const paddleCenter = rightPaddle.y + rightPaddle.height / 2;
 
         if (ball.y < paddleCenter) {
-            rightPaddle.dy = -paddleSpeed;
+            rightPaddle.dy = -2;
         } else if (ball.y > paddleCenter) {
-            rightPaddle.dy = paddleSpeed;
+            rightPaddle.dy = 2;
         } else {
             rightPaddle.dy = 0;
         }
@@ -214,7 +211,7 @@ function loop()
         ball.speedMultiplier += ballSpeedIncrement;
 
         // limitar la velocidad máxima
-        const currentSpeed = Math.min(ballSpeed * ball.speedMultiplier, ballSpeedMax);
+        currentSpeed = Math.min(ballSpeed * ball.speedMultiplier, ballSpeedMax);
         // mantener la dirección pero ajustar velocidad
         ball.dx = Math.sign(ball.dx) * currentSpeed;
         ball.dy = Math.sign(ball.dy) * currentSpeed;
